@@ -1,0 +1,43 @@
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+name:
+  value: alibou
+spring:
+  docker:
+    compose:
+      enabled: false
+  cloud:
+    config:
+      override-system-properties: false
+  output:
+    ansi:
+      enabled: always
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0   # Trace 50% des requêtes pour limiter l'impact sur les performances
+  endpoints:
+    web:
+      exposure:
+        include: "*"     #or health,metrics,prometheus, sbom  N’expose que les endpoints essentiels (santé et métriques)
+    health:
+      show:
+        details: always
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){blue} %clr(${LOG_LEVEL_PATTERN:-%5p}) %m%n"
+

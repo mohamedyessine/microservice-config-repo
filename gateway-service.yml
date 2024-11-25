@@ -1,0 +1,63 @@
+server:
+  port: 8222
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: customer-service
+          uri: lb:http://customer-service
+          predicates:
+            - Path=/api/v1/customers/**
+          filters:
+            - RewritePath=/api/v1/customers/(?<path>.*), /$\{path}
+        - id: order-service
+          uri: lb:http://order-service
+          predicates:
+            - Path=/api/v1/orders/**
+          filters:
+            - RewritePath=/api/v1/orders/(?<path>.*), /$\{path}
+        - id: order-lines-service
+          uri: lb:http://order-lines-service
+          predicates:
+            - Path=/api/v1/order-lines/**
+          filters:
+            - RewritePath=/api/v1/order-lines/(?<path>.*), /$\{path}
+        - id: product-service
+          uri: lb:http://product-service
+          predicates:
+            - Path=/api/v1/products/**
+          filters:
+            - RewritePath=/api/v1/products/(?<path>.*), /$\{path}
+        - id: payment-service
+          uri: lb:http://payment-service
+          predicates:
+            - Path=/api/v1/payments/**
+          filters:
+            - RewritePath=/api/v1/payments/(?<path>.*), /$\{path}
+        - id: openapi
+          uri: http://localhost:${server.port}
+          predicates:
+            - Path=/v3/api-docs/**
+          filters:
+            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+
+
+springdoc:
+  swagger-ui:
+#    filter: true
+#    operationsSorter: method
+#    tagsSorter: alpha  # Optional: Sort tags in alphabetical order
+#    displayRequestDuration: true  # Optional: Display request duration for each API call
+#    tryItOutEnabled: true
+    urls:
+      - name: Customer Service
+        url: /api/v1/customers/v3/api-docs
+      - name: Order Service
+        url: /api/v1/orders/v3/api-docs
+      - name: Payment Service
+        url: /api/v1/payments/v3/api-docs
+      - name: Product Service
+        url: /api/v1/products/v3/api-docs
