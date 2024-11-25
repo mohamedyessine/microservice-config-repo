@@ -36,7 +36,7 @@ management:
             requests: true
   zipkin:
     tracing:
-      endpoint: http://tempo:9411/api/v2/spans
+      endpoint: http://localhost:9411/api/v2/spans
 logging:
   pattern:
     console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){blue} %clr(${LOG_LEVEL_PATTERN:-%5p}) %m%n"
