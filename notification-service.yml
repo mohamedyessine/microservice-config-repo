@@ -20,7 +20,7 @@ spring:
         spring.json.trusted.packages: '*'
         spring.json.type.mapping: orderConfirmation:com.alibou.notification.kafka.order.OrderConfirmation,paymentConfirmation:com.alibou.notification.kafka.payment.PaymentConfirmation
   mail:
-    host: ms-mail-dev
+    host: localhost
     port: 1025
     username: yessine
     password: Yessine07+
