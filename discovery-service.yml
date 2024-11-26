@@ -1,6 +1,6 @@
 eureka:
-  instance:
-    hostname: localhost
+#  instance:
+#    hostname: localhost
   client:
     registerWithEureka: true
     fetchRegistry: true
