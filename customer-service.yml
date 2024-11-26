@@ -5,7 +5,7 @@ spring:
     mongodb:
       username: yessine
       password: Yessine07+
-      host: localhost
+      host: mongodb
       port: 27017
       database: customer
       authentication-database: admin
